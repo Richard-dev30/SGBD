@@ -1,0 +1,351 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{CAB23721-F685-4AEC-9810-B2305900DF1B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ModificationBaseDeDonnees</RootNamespace>
+    <AssemblyName>ModificationBaseDeDonnees</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Interop.BarTender, Version=11.0.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>P:\Richard D\Bartender API\Interop.BarTender.dll</HintPath>
+    </Reference>
+    <Reference Include="Interop.BtShlExtLib">
+      <HintPath>P:\Richard D\Bartender API\Interop.BtShlExtLib.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Maestro.Interface, Version=11.0.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>P:\Richard D\Bartender API\Maestro.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="Maestro.Library, Version=11.0.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>P:\Richard D\Bartender API\Maestro.Library.dll</HintPath>
+    </Reference>
+    <Reference Include="Seagull.BarTender.Print, Version=11.0.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>P:\Richard D\Bartender API\Seagull.BarTender.Print.dll</HintPath>
+    </Reference>
+    <Reference Include="Seagull.Interop, Version=11.0.8.1, Culture=neutral, PublicKeyToken=109ff779a1b4cbc7, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>P:\Richard D\Bartender API\Seagull.Interop.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ADDEtiquette.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADDEtiquette.Designer.cs">
+      <DependentUpon>ADDEtiquette.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADDParametre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADDParametre.Designer.cs">
+      <DependentUpon>ADDParametre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="BDDEtiquettesPFDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BDDEtiquettesPFDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="ChoixOrigine.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoixOrigine.Designer.cs">
+      <DependentUpon>ChoixOrigine.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChoixPays.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoixPays.Designer.cs">
+      <DependentUpon>ChoixPays.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChoixVraiFaux.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ChoixVraiFaux.Designer.cs">
+      <DependentUpon>ChoixVraiFaux.cs</DependentUpon>
+    </Compile>
+    <Compile Include="CommentaireDeSuppression.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CommentaireDeSuppression.Designer.cs">
+      <DependentUpon>CommentaireDeSuppression.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Compteurs_SN_IESDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Compteurs_SN_IESDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Creation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Creation.Designer.cs">
+      <DependentUpon>Creation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADDFils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADDFils.Designer.cs">
+      <DependentUpon>ADDFils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ADDTypeFamille.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ADDTypeFamille.Designer.cs">
+      <DependentUpon>ADDTypeFamille.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DELETEFils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DELETEFils.Designer.cs">
+      <DependentUpon>DELETEFils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DELETEListeParametre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DELETEListeParametre.Designer.cs">
+      <DependentUpon>DELETEListeParametre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DELETEParametre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DELETEParametre.Designer.cs">
+      <DependentUpon>DELETEParametre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DELETEType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DELETEType.Designer.cs">
+      <DependentUpon>DELETEType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Dupliquer.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dupliquer.Designer.cs">
+      <DependentUpon>Dupliquer.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DupliquerReference.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DupliquerReference.Designer.cs">
+      <DependentUpon>DupliquerReference.cs</DependentUpon>
+    </Compile>
+    <Compile Include="EtiquetteHelper.cs" />
+    <Compile Include="EtiquettePF.cs" />
+    <Compile Include="MODIFListeParametre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MODIFListeParametre.Designer.cs">
+      <DependentUpon>MODIFListeParametre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MODIFParametre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MODIFParametre.Designer.cs">
+      <DependentUpon>MODIFParametre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Main.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Main.Designer.cs">
+      <DependentUpon>Main.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Modif.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Modif.Designer.cs">
+      <DependentUpon>Modif.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MODIFFils.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MODIFFils.Designer.cs">
+      <DependentUpon>MODIFFils.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MODIFType.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MODIFType.Designer.cs">
+      <DependentUpon>MODIFType.cs</DependentUpon>
+    </Compile>
+    <Compile Include="NouvelleBaseEssaieDataSet.cs">
+      <DependentUpon>NouvelleBaseEssaieDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="NouvelleBaseEssaieDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>NouvelleBaseEssaieDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="VUEBDD.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="VUEBDD.Designer.cs">
+      <DependentUpon>VUEBDD.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="ADDEtiquette.resx">
+      <DependentUpon>ADDEtiquette.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADDFils.resx">
+      <DependentUpon>ADDFils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADDparametre.resx">
+      <DependentUpon>ADDParametre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ADDTypeFamille.resx">
+      <DependentUpon>ADDTypeFamille.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoixOrigine.resx">
+      <DependentUpon>ChoixOrigine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoixPays.resx">
+      <DependentUpon>ChoixPays.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ChoixVraiFaux.resx">
+      <DependentUpon>ChoixVraiFaux.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CommentaireDeSuppression.resx">
+      <DependentUpon>CommentaireDeSuppression.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Creation.resx">
+      <DependentUpon>Creation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DELETEFils.resx">
+      <DependentUpon>DELETEFils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DELETEListeParametre.resx">
+      <DependentUpon>DELETEListeParametre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DELETEParametre.resx">
+      <DependentUpon>DELETEParametre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DELETEType.resx">
+      <DependentUpon>DELETEType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Dupliquer.resx">
+      <DependentUpon>Dupliquer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DupliquerReference.resx">
+      <DependentUpon>DupliquerReference.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MODIFListeParametre.resx">
+      <DependentUpon>MODIFListeParametre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MODIFParametre.resx">
+      <DependentUpon>MODIFParametre.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Main.resx">
+      <DependentUpon>Main.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Modif.resx">
+      <DependentUpon>Modif.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MODIFFils.resx">
+      <DependentUpon>MODIFFils.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MODIFType.resx">
+      <DependentUpon>MODIFType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="VUEBDD.resx">
+      <DependentUpon>VUEBDD.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="BDDEtiquettesPFDataSet.xsc">
+      <DependentUpon>BDDEtiquettesPFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="BDDEtiquettesPFDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>BDDEtiquettesPFDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="BDDEtiquettesPFDataSet.xss">
+      <DependentUpon>BDDEtiquettesPFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Compteurs_SN_IESDataSet.xsc">
+      <DependentUpon>Compteurs_SN_IESDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Compteurs_SN_IESDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Compteurs_SN_IESDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Compteurs_SN_IESDataSet.xss">
+      <DependentUpon>Compteurs_SN_IESDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NouvelleBaseEssaieDataSet.xsc">
+      <DependentUpon>NouvelleBaseEssaieDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="NouvelleBaseEssaieDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>NouvelleBaseEssaieDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="NouvelleBaseEssaieDataSet.xss">
+      <DependentUpon>NouvelleBaseEssaieDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,65 @@
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.exe.config
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.exe
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.pdb
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csprojAssemblyReference.cache
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Properties.Resources.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csproj.GenerateResource.cache
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.exe
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.pdb
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Main.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Modif.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Creation.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDFils.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDTypeFamille.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDParametre.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDEtiquette.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixVraiFaux.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixOrigine.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixPays.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.CommentaireDeSuppression.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csproj.CoreCompileInputs.cache
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Dupliquer.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DupliquerReference.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.exe.config
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.exe
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\ModificationBaseDeDonnées.pdb
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csprojAssemblyReference.cache
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDEtiquette.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDFils.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ADDTypeFamille.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixOrigine.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixPays.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.ChoixVraiFaux.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.CommentaireDeSuppression.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Creation.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Dupliquer.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DupliquerReference.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Main.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Modif.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.Properties.Resources.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csproj.GenerateResource.cache
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.exe
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.pdb
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFFils.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFType.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFFils.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFType.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFParametre.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFListeParametre.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEFils.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEType.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEListeParametre.resources
+C:\Users\rmarr\Desktop\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEFils.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEListeParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.DELETEType.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFListeParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.MODIFParametre.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.VUEBDD.resources
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\Maestro.Interface.dll
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\Maestro.Library.dll
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\Seagull.BarTender.Print.dll
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\bin\Debug\Seagull.Interop.dll
+C:\Users\richard.durano\Desktop\SGBD V4\V4\ModificationBaseDeDonnées\obj\Debug\ModificationBaseDeDonnées.csproj.CopyComplete
