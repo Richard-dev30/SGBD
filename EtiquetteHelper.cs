@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace ModificationBaseDeDonnees
     public class EtiquetteHelper
     {
         public String reference;
+        public int nbreti;
         public TabControl Parametretabpage;
         public TabPage tabPage1;
         public TabPage tabPage2;
@@ -18,14 +20,19 @@ namespace ModificationBaseDeDonnees
         public TabPage tabPage5;
         public TabPage tabPage6;
         public TabPage tabPage7;
-        public NouvelleBaseEssaieDataSet parametreTableAdapter;
+        public NouvelleBaseEssaieDataSetTableAdapters.ParametreTableAdapter parametreTableAdapter;
         public NouvelleBaseEssaieDataSet nouvelleBaseEssaieDataSet;
-        public FillNb
         public DataGridView dataGridViewNbrEti;
         public DataGridView dataGridViewParametre;
         public DataGridView dataGridViewParametre2;
+        public DataGridView dataGridViewParametre3;
+        public DataGridView dataGridViewParametre4;
+        public DataGridView dataGridViewParametre5;
+        public DataGridView dataGridViewParametre6;
+        public DataGridView dataGridViewParametre7;
+        public DataGridView dataGridViewFils;
 
-        public EtiquetteHelper(ref String refeerence, ref TabControl tabCtrl, ref TabPage tp1, ref TabPage tp2, ref TabPage tp3, ref TabPage tp4, ref TabPage tp5, ref TabPage tp6, ref TabPage tp7, ref DataGridView dgv1, )
+        public EtiquetteHelper(ref String refeerence, ref TabControl tabCtrl, ref TabPage tp1, ref TabPage tp2, ref TabPage tp3, ref TabPage tp4, ref TabPage tp5, ref TabPage tp6, ref TabPage tp7, ref DataGridView dgv1, ref DataGridView dgv2, ref DataGridView dgv3, ref DataGridView dgv4, ref DataGridView dgv5, ref DataGridView dgv6, ref DataGridView dgv7, ref DataGridView dgv8, ref DataGridView dgv9)
         {
             reference = refeerence;
             Parametretabpage = tabCtrl;
@@ -37,13 +44,20 @@ namespace ModificationBaseDeDonnees
             tabPage6 = tp6;
             tabPage7 = tp7;
             dataGridViewNbrEti = dgv1;
-
+            dataGridViewParametre = dgv2;
+            dataGridViewParametre2 = dgv3;
+            dataGridViewParametre3 = dgv4;
+            dataGridViewParametre4 = dgv5;
+            dataGridViewParametre5 = dgv6;
+            dataGridViewParametre6 = dgv7;
+            dataGridViewParametre7 = dgv8;
+            dataGridViewFils = dgv9;
         }
 
         public void GetEtiquette(out int nbretiq)
         {
             string reef = reference;
-            this.parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
+            parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
             nbretiq = dataGridViewNbrEti.Rows.Count;
             if (nbretiq == 1)
             {

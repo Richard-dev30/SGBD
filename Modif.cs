@@ -48,6 +48,7 @@ namespace ModificationBaseDeDonnees
 
             // Définie les étiquettes et les paramètres à l'interieure de ces dernières           
             this.parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
+
             GetEtiquette(out int nbretiq);
 
             if (nbretiq > 0)
@@ -335,121 +336,121 @@ namespace ModificationBaseDeDonnees
             }
         }
 
-       /* private void comboBoxListeEtiquette_Validating(object sender, CancelEventArgs e)
-        {
-            nbreti = nbreti + 1;
-            int i = 0;
-            string etiquette = comboBoxListeEtiquette.Text;
-            this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette);
-            int nbrroweti = dataGridViewEtiquette.Rows.Count;
-            string produit = dataGridViewNatureDuProduit.Rows[0].Cells[0].Value.ToString();       
-            if (nbreti == 1)
-            {
-                Parametretabpage.Controls.Add(tabPage2);
-                for (i = 0; i < nbrroweti - 1; i++)
-                {                    
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage2.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
+        /* private void comboBoxListeEtiquette_Validating(object sender, CancelEventArgs e)
+         {
+             nbreti = nbreti + 1;
+             int i = 0;
+             string etiquette = comboBoxListeEtiquette.Text;
+             this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette);
+             int nbrroweti = dataGridViewEtiquette.Rows.Count;
+             string produit = dataGridViewNatureDuProduit.Rows[0].Cells[0].Value.ToString();       
+             if (nbreti == 1)
+             {
+                 Parametretabpage.Controls.Add(tabPage2);
+                 for (i = 0; i < nbrroweti - 1; i++)
+                 {                    
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre2.Rows.Add();
+                     dataGridViewParametre2.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre2.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage2.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
 
 
-            if (nbreti == 3)
-            {
-                Parametretabpage.Controls.Add(tabPage3);
-                string etiquette2 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette2);
-                int nbrroweti2 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti2 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage3.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
+             if (nbreti == 3)
+             {
+                 Parametretabpage.Controls.Add(tabPage3);
+                 string etiquette2 = comboBoxListeEtiquette.Text;
+                 this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette2);
+                 int nbrroweti2 = dataGridViewEtiquette.Rows.Count;
+                 for (i = 0; i < nbrroweti2 - 1; i++)
+                 {
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre3.Rows.Add();
+                     dataGridViewParametre3.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre3.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage3.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
 
 
-            if (nbreti == 5)
-            {
-                Parametretabpage.Controls.Add(tabPage4);
-                string etiquette3 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette3);
-                int nbrroweti3 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti3 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage4.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
+             if (nbreti == 5)
+             {
+                 Parametretabpage.Controls.Add(tabPage4);
+                 string etiquette3 = comboBoxListeEtiquette.Text;
+                 this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette3);
+                 int nbrroweti3 = dataGridViewEtiquette.Rows.Count;
+                 for (i = 0; i < nbrroweti3 - 1; i++)
+                 {
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre4.Rows.Add();
+                     dataGridViewParametre4.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre4.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage4.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
 
-            if (nbreti == 7)
-            {
-                Parametretabpage.Controls.Add(tabPage5);
-                string etiquette4 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette4);
-                int nbrroweti4 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti4 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre5.Rows.Add();
-                    dataGridViewParametre5.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre5.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage5.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
+             if (nbreti == 7)
+             {
+                 Parametretabpage.Controls.Add(tabPage5);
+                 string etiquette4 = comboBoxListeEtiquette.Text;
+                 this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette4);
+                 int nbrroweti4 = dataGridViewEtiquette.Rows.Count;
+                 for (i = 0; i < nbrroweti4 - 1; i++)
+                 {
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre5.Rows.Add();
+                     dataGridViewParametre5.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre5.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage5.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
 
-            if (nbreti == 9)
-            {
-                Parametretabpage.Controls.Add(tabPage6);
-                string etiquette5 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette5);
-                int nbrroweti5 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti5 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre6.Rows.Add();
-                    dataGridViewParametre6.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre6.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage6.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
+             if (nbreti == 9)
+             {
+                 Parametretabpage.Controls.Add(tabPage6);
+                 string etiquette5 = comboBoxListeEtiquette.Text;
+                 this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette5);
+                 int nbrroweti5 = dataGridViewEtiquette.Rows.Count;
+                 for (i = 0; i < nbrroweti5 - 1; i++)
+                 {
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre6.Rows.Add();
+                     dataGridViewParametre6.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre6.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage6.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
 
-            if (nbreti == 11)
-            {
-                Parametretabpage.Controls.Add(tabPage7);
-                string etiquette6 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette6);
-                int nbrroweti6 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti6 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre7.Rows.Add();
-                    dataGridViewParametre7.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre7.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage7.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-        }*/
+             if (nbreti == 11)
+             {
+                 Parametretabpage.Controls.Add(tabPage7);
+                 string etiquette6 = comboBoxListeEtiquette.Text;
+                 this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette6);
+                 int nbrroweti6 = dataGridViewEtiquette.Rows.Count;
+                 for (i = 0; i < nbrroweti6 - 1; i++)
+                 {
+                     string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
+                     dataGridViewParametre7.Rows.Add();
+                     dataGridViewParametre7.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                     dataGridViewParametre7.Rows[i].Cells[1].Value = parametre;
+                 }
+                 tabPage7.Text = etiquette;
+                 this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
+                 nbreti = nbreti + 1;
+             }
+         }*/
 
         private void dataGridViewParametre2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -774,80 +775,80 @@ namespace ModificationBaseDeDonnees
 
         private void dataGridViewParametre5_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-                int row = e.RowIndex;
-                var senderGrid = (DataGridView)sender;
+            int row = e.RowIndex;
+            var senderGrid = (DataGridView)sender;
 
-                if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
-                    e.RowIndex >= 0)
+            if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
+                e.RowIndex >= 0)
+            {
+                string variable = dataGridViewParametre5.Rows[row].Cells[1].Value.ToString();
+                bool testetl = variable == "CodeETL";
+                bool testmac = variable == "ChargePointMac";
+                bool testrecap = variable == "PrintRecap";
+                bool testimprim = variable == "A_Imprimer";
+                bool testindice = variable == "Indice";
+                bool testindice2 = variable == "indice";
+                bool testOrigine = variable == "Origine";
+                bool testOrigin = variable == "Origin";
+                bool testorigin = variable == "origin";
+                bool testPays = variable == "Pays";
+                bool testpays = variable == "pays";
+                bool testModele = variable == "Modele";
+                bool testModelePath = variable == "Modele_Path";
+                if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
-                    string variable = dataGridViewParametre5.Rows[row].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    bool testModele = variable == "Modele";
-                    bool testModelePath = variable == "Modele_Path";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true)
-                    {
-                        ChoixVraiFaux = new ChoixVraiFaux();
-                        ChoixVraiFaux.ShowDialog();
-                        string choix = ChoixVraiFaux.choix;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = choix;
-                    }
-                    if (testindice == true)
-                    {
-                        string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                        string indice = reference.Substring(6, 2);
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
-                    }
-                    if (testindice2 == true)
-                    {
-                        string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                        string indice = reference.Substring(6, 2);
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
-                    }
-                    if (testOrigine == true)
-                    {
-                        ChoixOrigine = new ChoixOrigine();
-                        ChoixOrigine.ShowDialog();
-                        string origine = ChoixOrigine.origine;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
-                    }
-                    if (testOrigin == true)
-                    {
-                        ChoixOrigine = new ChoixOrigine();
-                        ChoixOrigine.ShowDialog();
-                        string origine = ChoixOrigine.origine;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
-                    }
-                    if (testorigin == true)
-                    {
-                        ChoixOrigine = new ChoixOrigine();
-                        ChoixOrigine.ShowDialog();
-                        string origine = ChoixOrigine.origine;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
-                    }
-                    if (testPays == true)
-                    {
-                        ChoixPays = new ChoixPays();
-                        ChoixPays.ShowDialog();
-                        string pays = ChoixPays.pays;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
-                    }
-                    if (testpays == true)
-                    {
-                        ChoixPays = new ChoixPays();
-                        ChoixPays.ShowDialog();
-                        string pays = ChoixPays.pays;
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
-                    }
+                    ChoixVraiFaux = new ChoixVraiFaux();
+                    ChoixVraiFaux.ShowDialog();
+                    string choix = ChoixVraiFaux.choix;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = choix;
+                }
+                if (testindice == true)
+                {
+                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                    string indice = reference.Substring(6, 2);
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
+                }
+                if (testindice2 == true)
+                {
+                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
+                    string indice = reference.Substring(6, 2);
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
+                }
+                if (testOrigine == true)
+                {
+                    ChoixOrigine = new ChoixOrigine();
+                    ChoixOrigine.ShowDialog();
+                    string origine = ChoixOrigine.origine;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
+                }
+                if (testOrigin == true)
+                {
+                    ChoixOrigine = new ChoixOrigine();
+                    ChoixOrigine.ShowDialog();
+                    string origine = ChoixOrigine.origine;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
+                }
+                if (testorigin == true)
+                {
+                    ChoixOrigine = new ChoixOrigine();
+                    ChoixOrigine.ShowDialog();
+                    string origine = ChoixOrigine.origine;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
+                }
+                if (testPays == true)
+                {
+                    ChoixPays = new ChoixPays();
+                    ChoixPays.ShowDialog();
+                    string pays = ChoixPays.pays;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
+                }
+                if (testpays == true)
+                {
+                    ChoixPays = new ChoixPays();
+                    ChoixPays.ShowDialog();
+                    string pays = ChoixPays.pays;
+                    dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
+                }
                 if (testModele == true)
                 {
                     OpenFileDialog Browser = new OpenFileDialog();
@@ -1210,7 +1211,7 @@ namespace ModificationBaseDeDonnees
             {
                 string fils = dataGridViewFils.Rows[row].Cells[4].Value.ToString();
                 int fils1 = fils.Length;
-                string reffils = fils.Substring(0,8);
+                string reffils = fils.Substring(0, 8);
 
                 string carte = fils.Substring(11, fils1 - 11);
                 dataGridViewFils.Rows[row].Cells[2].Value = reffils;
@@ -1449,7 +1450,7 @@ namespace ModificationBaseDeDonnees
         {
             string _modelePath = "S:\\Production\\Etiquettes\\MODELES\\";
             string btwFile = tabPage1.Text;
-             _btEngine = new Engine(true);
+            _btEngine = new Engine(true);
             LabelFormatDocument btFormat = _btEngine.Documents.Open(_modelePath + btwFile);
 
             string parts;
@@ -1458,9 +1459,9 @@ namespace ModificationBaseDeDonnees
             MessageBox.Show(parts);
         }
 
-        private void GetEtiquette(out int nbretiq)
+        /*private void GetEtiquette(out int nbretiq)
         {
-            EtiquetteHelper etiqHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref dataGridViewNbrEti);
+            EtiquetteHelper etiqHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre6, ref dataGridViewParametre7, ref dataGridViewFils);
             etiqHelper.GetEtiquette(out nbretiq);
 
 
@@ -1823,8 +1824,12 @@ namespace ModificationBaseDeDonnees
                     dataGridViewParametre7.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
                 }
                 nbreti = 13;
-            }          
-            this.parametreTableAdapter.FiltreParameterByRef(this.nouvelleBaseEssaieDataSet.Parametre, reef);
+            }       
+        }*/
+        private void GetEtiquette(out int nbretiq)
+        {
+            EtiquetteHelper etiqHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre6, ref dataGridViewParametre7, ref dataGridViewFils);
+            etiqHelper.GetEtiquette(out nbretiq);
         }
     }
 }

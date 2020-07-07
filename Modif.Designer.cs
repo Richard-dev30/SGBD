@@ -125,6 +125,7 @@
             this.buttonAnnuler = new System.Windows.Forms.Button();
             this.buttontest = new System.Windows.Forms.Button();
             this.buttonEtiquette = new System.Windows.Forms.Button();
+            this.parametreTableAdapter1 = new ModificationBaseDeDonnees.NouvelleBaseEssaieDataSetTableAdapters.ParametreTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewProduit)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.produitBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nouvelleBaseEssaieDataSet)).BeginInit();
@@ -926,6 +927,10 @@
             this.buttonEtiquette.UseVisualStyleBackColor = true;
             this.buttonEtiquette.Click += new System.EventHandler(this.buttonEtiquette_Click);
             // 
+            // parametreTableAdapter1
+            // 
+            this.parametreTableAdapter1.ClearBeforeFill = true;
+            // 
             // Modif
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1076,5 +1081,6 @@
         private System.Windows.Forms.DataGridViewButtonColumn Remplir;
         private System.Windows.Forms.Button buttontest;
         private System.Windows.Forms.Button buttonEtiquette;
+        private NouvelleBaseEssaieDataSetTableAdapters.ParametreTableAdapter parametreTableAdapter1;
     }
 }
