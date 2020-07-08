@@ -76,6 +76,7 @@ namespace ModificationBaseDeDonnees
                     GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }    
             }
+            //mdifi
             // Si 3 étiquette sont detecté
             if (nbretiq > 2)
             {
