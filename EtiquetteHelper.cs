@@ -3,6 +3,7 @@ using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -56,8 +57,9 @@ namespace ModificationBaseDeDonnees
 
         public void GetEtiquette(out int nbretiq)
         {
+            nouvelleBaseEssaieDataSet = new NouvelleBaseEssaieDataSet();
             string reef = reference;
-            parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
+            parametreTableAdapter.FillNbrEti(nouvelleBaseEssaieDataSet.Parametre, reef);
             nbretiq = dataGridViewNbrEti.Rows.Count;
             if (nbretiq == 1)
             {
@@ -418,6 +420,25 @@ namespace ModificationBaseDeDonnees
             }
             this.parametreTableAdapter.FiltreParameterByRef(this.nouvelleBaseEssaieDataSet.Parametre, reef);
         }
-    }
-    
+        public void GetAutoPara(string Parametre, int rowpara, Object CellColor, Object CellValue)
+        {           
+                bool testetl = Parametre == "CodeETL";
+                bool testmac = Parametre == "ChargePointMac";
+                bool testrecap = Parametre == "PrintRecap";
+                bool testimprim = Parametre == "A_Imprimer";
+                bool testindice = Parametre == "Indice";
+                bool testindice2 = Parametre == "indice";
+                bool testOrigine = Parametre == "Origine";
+                bool testOrigin = Parametre == "Origin";
+                bool testorigin = Parametre == "origin";
+                bool testPays = Parametre == "Pays";
+                bool testpays = Parametre == "pays";
+                if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
+                {
+                    CellColor = Color.Red;
+                    CellValue = "OK";
+                }
+            }
+        }
+    }   
 }

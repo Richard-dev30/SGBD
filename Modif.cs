@@ -30,10 +30,10 @@ namespace ModificationBaseDeDonnees
 
         private void Modif_Load(object sender, EventArgs e)
         {
-            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.RequeteFils'. Vous pouvez la déplacer ou la supprimer selon les besoins.
-            this.requeteFilsTableAdapter.Fill(this.nouvelleBaseEssaieDataSet.RequeteFils);
             string reef = reference;
             string faamille = famille;
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.RequeteFils'. Vous pouvez la déplacer ou la supprimer selon les besoins.
+            this.requeteFilsTableAdapter.Fill(this.nouvelleBaseEssaieDataSet.RequeteFils);            
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ReferenceFils'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.referenceFilsTableAdapter.Fill(this.nouvelleBaseEssaieDataSet.ReferenceFils);
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.TypeFamille'. Vous pouvez la déplacer ou la supprimer selon les besoins.
@@ -42,181 +42,98 @@ namespace ModificationBaseDeDonnees
             this.arborescenceTableAdapter.FiltreFilsByRef(this.nouvelleBaseEssaieDataSet.Arborescence, reef);
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.Produit'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.produitTableAdapter.FiltrebyRef(this.nouvelleBaseEssaieDataSet.Produit, reef);
+            // définie le produit
             string produit = dataGridViewNatureDuProduit.Rows[0].Cells[0].Value.ToString();
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ParametreListe'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.parametreListeTableAdapter.FiltreListeParametre(this.nouvelleBaseEssaieDataSet.ParametreListe, produit);
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ListeEtiquette'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-
-            // Définie les étiquettes et les paramètres à l'interieure de ces dernières           
+            // Définie le nombre d'étiquette via le datagridview nbreti           
             this.parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
-
+            // Récupère les étiquettes et les paramètres dédié
             GetEtiquette(out int nbretiq);
-
+            // Si une étiquette est detecté
             if (nbretiq > 0)
             {
-                int rowpara = dataGridViewParametre.Rows.Count;
+                int rowpara = dataGridViewParametre2.Rows.Count;
                 for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
+            // Si 2 étiquette sont detecté
             if (nbretiq > 1)
             {
-                int rowpara2 = dataGridViewParametre2.Rows.Count;
-                for (int x = 0; x < rowpara2 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre2.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre2.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre2.Rows[x].Cells[4].Value = "OK";
-                    }
-                }
+                    string Parametre = dataGridViewParametre2.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre2.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre2.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
+                }    
             }
+            // Si 3 étiquette sont detecté
             if (nbretiq > 2)
             {
-                int rowpara3 = dataGridViewParametre3.Rows.Count;
-                for (int x = 0; x < rowpara3 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre3.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre3.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre3.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre3.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre3.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre3.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
+            // Si 4 étiquette sont detecté
             if (nbretiq > 3)
             {
-                int rowpara4 = dataGridViewParametre4.Rows.Count;
-                for (int x = 0; x < rowpara4 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre4.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre4.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre4.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre4.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre4.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre4.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
+            // Si 5 étiquette sont detecté
             if (nbretiq > 4)
             {
-                int rowpara5 = dataGridViewParametre5.Rows.Count;
-                for (int x = 0; x < rowpara5 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre5.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre5.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre5.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre5.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre5.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre5.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
+            // Si 6 étiquette sont detecté
             if (nbretiq > 5)
             {
-                int rowpara6 = dataGridViewParametre6.Rows.Count;
-                for (int x = 0; x < rowpara6 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre6.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre6.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre6.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre6.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre6.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre6.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
+            // Si 7 étiquette sont detecté
             if (nbretiq > 6)
             {
-                int rowpara7 = dataGridViewParametre7.Rows.Count;
-                for (int x = 0; x < rowpara7 - 1; x++)
+                int rowpara = dataGridViewParametre2.Rows.Count;
+                for (int x = 0; x < rowpara - 1; x++)
                 {
-                    string variable = dataGridViewParametre7.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
-                    if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
-                    {
-                        dataGridViewParametre7.Rows[x].Cells[4].Style.BackColor = Color.Red;
-                        dataGridViewParametre7.Rows[x].Cells[4].Value = "OK";
-                    }
+                    string Parametre = dataGridViewParametre7.Rows[x].Cells[1].Value.ToString();
+                    Object CellColor = dataGridViewParametre7.Rows[x].Cells[4].Style.BackColor;
+                    Object CellValue = dataGridViewParametre7.Rows[x].Cells[4].Value;
+                    GetAutoPara(Parametre, rowpara, CellColor, CellValue);
                 }
             }
         }
@@ -1830,6 +1747,11 @@ namespace ModificationBaseDeDonnees
         {
             EtiquetteHelper etiqHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre6, ref dataGridViewParametre7, ref dataGridViewFils);
             etiqHelper.GetEtiquette(out nbretiq);
+        }
+        private void GetAutoPara(string Parametre, int rowpara, Object CellColor, Object CellValue)
+        {
+            EtiquetteHelper etiHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre6, ref dataGridViewParametre7, ref dataGridViewFils);
+            etiHelper.GetAutoPara(Parametre, rowpara, CellColor, CellValue);
         }
     }
 }
