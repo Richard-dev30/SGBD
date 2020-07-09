@@ -23,401 +23,40 @@ namespace ModificationBaseDeDonnees
         {
             InitializeComponent();
         }
-
         private void Dupliquer_Load(object sender, EventArgs e)
         {
+            string reef = reference;
+            string familles = famille;
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.RequeteFils'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.requeteFilsTableAdapter.Fill(this.nouvelleBaseEssaieDataSet.RequeteFils);
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ReferenceFils'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.referenceFilsTableAdapter.Fill(this.nouvelleBaseEssaieDataSet.ReferenceFils);
-            string reef = reference;
-            string familles = famille;
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.Produit'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.produitTableAdapter.FiltrebyRef(this.nouvelleBaseEssaieDataSet.Produit, reef);
+            // définie le produit
             string produit = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.Parametre'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.typeFamilleTableAdapter.FiltreFamilleByProduct(this.nouvelleBaseEssaieDataSet.TypeFamille, familles);
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.Arborescence'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.arborescenceTableAdapter.FiltreFilsByRef(this.nouvelleBaseEssaieDataSet.Arborescence, produit);
-            this.parametreTableAdapter.FiltreParameterByRef(this.nouvelleBaseEssaieDataSet.Parametre, produit);
+            // Définie la nature du produit
             string natureproduit = dataGridViewNatureDuProduit1.Rows[0].Cells[0].Value.ToString();
+            // // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ParametreListe'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.parametreListeTableAdapter.FiltreListeParametre(this.nouvelleBaseEssaieDataSet.ParametreListe, natureproduit);
+            // TODO: cette ligne de code charge les données dans la table 'nouvelleBaseEssaieDataSet.ListeEtiquette'. Vous pouvez la déplacer ou la supprimer selon les besoins.
             this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, natureproduit);
+            // Création de la nouvelle Référence
             DupliquerReference = new DupliquerReference();
-            DupliquerReference.ShowDialog();          
+            DupliquerReference.ShowDialog();
             string novuellereference = DupliquerReference.nouvellereferences;
+            // Application de la nouvelle Référence
             dataGridViewProduit.Rows[0].Cells[0].Value = novuellereference;
-
-
+            // Détermine le nombre d'étiquettes
             this.parametreTableAdapter.FillNbrEti(this.nouvelleBaseEssaieDataSet.Parametre, reef);
-            int nbretiq = dataGridViewNbrEti.Rows.Count;
-            if (nbretiq == 1)
-            {
-                Parametretabpage.Controls.Remove(tabPage2);
-                Parametretabpage.Controls.Remove(tabPage3);
-                Parametretabpage.Controls.Remove(tabPage4);
-                Parametretabpage.Controls.Remove(tabPage5);
-                Parametretabpage.Controls.Remove(tabPage6);
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = reef;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-            }
-            nbreti = 2;
-            if (nbretiq == 2)
-            {
-                Parametretabpage.Controls.Remove(tabPage3);
-                Parametretabpage.Controls.Remove(tabPage4);
-                Parametretabpage.Controls.Remove(tabPage5);
-                Parametretabpage.Controls.Remove(tabPage6);
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 4;
-            }
-            if (nbretiq == 3)
-            {
-                Parametretabpage.Controls.Remove(tabPage4);
-                Parametretabpage.Controls.Remove(tabPage5);
-                Parametretabpage.Controls.Remove(tabPage6);
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                string nameEti3 = dataGridViewNbrEti.Rows[2].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                tabPage3.Text = nameEti3;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti3);
-                int nbrrow3 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow3; i++)
-                {
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre3.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 6;
-            }
-            if (nbretiq == 4)
-            {
-                Parametretabpage.Controls.Remove(tabPage5);
-                Parametretabpage.Controls.Remove(tabPage6);
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                string nameEti3 = dataGridViewNbrEti.Rows[2].Cells[1].Value.ToString();
-                string nameEti4 = dataGridViewNbrEti.Rows[3].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                tabPage3.Text = nameEti3;
-                tabPage4.Text = nameEti4;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti3);
-                int nbrrow3 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow3; i++)
-                {
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre3.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti4);
-                int nbrrow4 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow4; i++)
-                {
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre4.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 8;
-            }
-            if (nbretiq == 5)
-            {
-                Parametretabpage.Controls.Remove(tabPage6);
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                string nameEti3 = dataGridViewNbrEti.Rows[2].Cells[1].Value.ToString();
-                string nameEti4 = dataGridViewNbrEti.Rows[3].Cells[1].Value.ToString();
-                string nameEti5 = dataGridViewNbrEti.Rows[4].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                tabPage3.Text = nameEti3;
-                tabPage4.Text = nameEti4;
-                tabPage5.Text = nameEti5;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti3);
-                int nbrrow3 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow3; i++)
-                {
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre3.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti4);
-                int nbrrow4 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow4; i++)
-                {
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre4.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti5);
-                int nbrrow5 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow5; i++)
-                {
-                    dataGridViewParametre5.Rows.Add();
-                    dataGridViewParametre5.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre5.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre5.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 10;
-            }
-            if (nbretiq == 6)
-            {
-                Parametretabpage.Controls.Remove(tabPage7);
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                string nameEti3 = dataGridViewNbrEti.Rows[2].Cells[1].Value.ToString();
-                string nameEti4 = dataGridViewNbrEti.Rows[3].Cells[1].Value.ToString();
-                string nameEti5 = dataGridViewNbrEti.Rows[4].Cells[1].Value.ToString();
-                string nameEti6 = dataGridViewNbrEti.Rows[5].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                tabPage3.Text = nameEti3;
-                tabPage4.Text = nameEti4;
-                tabPage5.Text = nameEti5;
-                tabPage6.Text = nameEti6;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti3);
-                int nbrrow3 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow3; i++)
-                {
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre3.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti4);
-                int nbrrow4 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow4; i++)
-                {
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre4.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti5);
-                int nbrrow5 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow5; i++)
-                {
-                    dataGridViewParametre5.Rows.Add();
-                    dataGridViewParametre5.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre5.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre5.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti6);
-                int nbrrow6 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow6; i++)
-                {
-                    dataGridViewParametre61.Rows.Add();
-                    dataGridViewParametre61.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre61.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre61.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 12;
-            }
-            if (nbretiq == 7)
-            {
-                string nameEti1 = dataGridViewNbrEti.Rows[0].Cells[1].Value.ToString();
-                string nameEti2 = dataGridViewNbrEti.Rows[1].Cells[1].Value.ToString();
-                string nameEti3 = dataGridViewNbrEti.Rows[2].Cells[1].Value.ToString();
-                string nameEti4 = dataGridViewNbrEti.Rows[3].Cells[1].Value.ToString();
-                string nameEti5 = dataGridViewNbrEti.Rows[4].Cells[1].Value.ToString();
-                string nameEti6 = dataGridViewNbrEti.Rows[5].Cells[1].Value.ToString();
-                string nameEti7 = dataGridViewNbrEti.Rows[6].Cells[1].Value.ToString();
-                tabPage1.Text = nameEti1;
-                tabPage2.Text = nameEti2;
-                tabPage3.Text = nameEti3;
-                tabPage4.Text = nameEti4;
-                tabPage5.Text = nameEti5;
-                tabPage6.Text = nameEti6;
-                tabPage7.Text = nameEti7;
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti1);
-                int nbrrow1 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow1; i++)
-                {
-                    dataGridViewParametre.Rows.Add();
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti2);
-                int nbrrow2 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i < nbrrow2; i++)
-                {
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre2.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti3);
-                int nbrrow3 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow3; i++)
-                {
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre3.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti4);
-                int nbrrow4 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow4; i++)
-                {
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre4.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti5);
-                int nbrrow5 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow5; i++)
-                {
-                    dataGridViewParametre5.Rows.Add();
-                    dataGridViewParametre5.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre5.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre5.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti6);
-                int nbrrow6 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow6; i++)
-                {
-                    dataGridViewParametre61.Rows.Add();
-                    dataGridViewParametre61.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre61.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre61.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                this.parametreTableAdapter.FillByRefAndEti(this.nouvelleBaseEssaieDataSet.Parametre, reef, nameEti7);
-                int nbrrow7 = dataGridViewNbrEti.Rows.Count;
-                for (int i = 0; i == nbrrow7; i++)
-                {
-                    dataGridViewParametre7.Rows.Add();
-                    dataGridViewParametre7.Rows[i].Cells[0].Value = novuellereference;
-                    dataGridViewParametre7.Rows[i].Cells[1].Value = dataGridViewNbrEti.Rows[i].Cells[2].Value;
-                    dataGridViewParametre7.Rows[i].Cells[2].Value = dataGridViewNbrEti.Rows[i].Cells[3].Value;
-                }
-                nbreti = 13;
-            }
-            this.parametreTableAdapter.FiltreParameterByRef(this.nouvelleBaseEssaieDataSet.Parametre, reef);
-
-
-            int row = dataGridViewParametre.RowCount;
-            int rowfils = dataGridViewFils.RowCount;
-            if (row > 1)
-            {
-                for (int i = 0; i < row - 1; i++)
-                {
-                    dataGridViewParametre.Rows[i].Cells[0].Value = novuellereference;
-                }
-            }
+            // Récupère les étiquettes et les paramètres dédié
+            GetEtiquette(out int nbretiq);
+            // Récupère le nombres de ligne dans fils pour poser la nouvelle ref
+            int rowfils = dataGridViewFils.Rows.Count;
             if (rowfils > 1)
             {
                 for (int i = 0; i < rowfils - 1; i++)
@@ -425,176 +64,120 @@ namespace ModificationBaseDeDonnees
                     dataGridViewFils.Rows[i].Cells[0].Value = novuellereference;
                 }
             }
+            // Si une étiquette est detecté
             if (nbretiq > 0)
             {
-                int rowpara = dataGridViewParametre.Rows.Count;
-                for (int x = 0; x < rowpara - 1; x++)
+                int row = dataGridViewParametre.Rows.Count;
+                for (int x = 0; x < row - 1; x++)
                 {
-                    string variable = dataGridViewParametre.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 2 étiquette sont detecté
             if (nbretiq > 1)
             {
                 int rowpara2 = dataGridViewParametre2.Rows.Count;
                 for (int x = 0; x < rowpara2 - 1; x++)
                 {
-                    string variable = dataGridViewParametre2.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre2.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre2.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre2.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre2.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 3 étiquette sont detecté
             if (nbretiq > 2)
             {
                 int rowpara3 = dataGridViewParametre3.Rows.Count;
                 for (int x = 0; x < rowpara3 - 1; x++)
                 {
-                    string variable = dataGridViewParametre3.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre3.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre3.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre3.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre3.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 4 étiquette sont detecté
             if (nbretiq > 3)
             {
                 int rowpara4 = dataGridViewParametre4.Rows.Count;
                 for (int x = 0; x < rowpara4 - 1; x++)
                 {
-                    string variable = dataGridViewParametre4.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre4.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre4.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre4.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre4.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 5 étiquette sont detecté
             if (nbretiq > 4)
             {
                 int rowpara5 = dataGridViewParametre5.Rows.Count;
                 for (int x = 0; x < rowpara5 - 1; x++)
                 {
-                    string variable = dataGridViewParametre5.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre5.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre5.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre5.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre5.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 6 étiquette sont detecté
             if (nbretiq > 5)
             {
                 int rowpara6 = dataGridViewParametre61.Rows.Count;
                 for (int x = 0; x < rowpara6 - 1; x++)
                 {
-                    string variable = dataGridViewParametre61.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre61.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre61.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre61.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre61.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
+            // Si 7 étiquette sont detecté
             if (nbretiq > 6)
             {
                 int rowpara7 = dataGridViewParametre7.Rows.Count;
                 for (int x = 0; x < rowpara7 - 1; x++)
                 {
-                    string variable = dataGridViewParametre7.Rows[x].Cells[1].Value.ToString();
-                    bool testetl = variable == "CodeETL";
-                    bool testmac = variable == "ChargePointMac";
-                    bool testrecap = variable == "PrintRecap";
-                    bool testimprim = variable == "A_Imprimer";
-                    bool testindice = variable == "Indice";
-                    bool testindice2 = variable == "indice";
-                    bool testOrigine = variable == "Origine";
-                    bool testOrigin = variable == "Origin";
-                    bool testorigin = variable == "origin";
-                    bool testPays = variable == "Pays";
-                    bool testpays = variable == "pays";
+                    string Parametre = dataGridViewParametre7.Rows[x].Cells[1].Value.ToString();
+                    GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                     if (testetl == true || testmac == true || testrecap == true || testimprim == true || testindice == true || testindice2 == true || testOrigine == true || testOrigin == true || testorigin == true || testPays == true || testpays == true)
                     {
                         dataGridViewParametre7.Rows[x].Cells[4].Style.BackColor = Color.Red;
                         dataGridViewParametre7.Rows[x].Cells[4].Value = "OK";
                     }
+                    dataGridViewParametre7.Rows[x].Cells[0].Value = novuellereference;
                 }
             }
-        }      
-
+        }
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -603,20 +186,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -624,84 +195,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre2_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -710,20 +226,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre2.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre2.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -731,84 +235,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre2.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre2.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre2.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre2.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre2.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre2.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre2.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre2.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre2.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre2.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -817,20 +266,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre3.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre3.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -838,84 +275,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre3.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre3.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre3.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre3.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre3.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre3.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre3.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre3.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre3.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre3.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre4_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -924,20 +306,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre4.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre4.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -945,84 +315,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre4.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre4.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre4.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre4.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre4.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre4.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre4.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre4.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre4.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre4.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre5_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1031,20 +346,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre5.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre5.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -1052,84 +355,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre5.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre5.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre5.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre5.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre5.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre61_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1138,20 +386,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre61.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre61.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -1159,84 +395,29 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre61.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre61.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre61.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre61.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre61.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre61.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre61.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre61.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre61.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre61.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
+        // Remplie automatiqument le paramètre en cliquant sur le bouton "Remplir Automatiquement"
         private void dataGridViewParametre7_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1245,20 +426,8 @@ namespace ModificationBaseDeDonnees
             if (senderGrid.Columns[e.ColumnIndex] is DataGridViewButtonColumn &&
                 e.RowIndex >= 0)
             {
-                string variable = dataGridViewParametre7.Rows[row].Cells[1].Value.ToString();
-                bool testetl = variable == "CodeETL";
-                bool testmac = variable == "ChargePointMac";
-                bool testrecap = variable == "PrintRecap";
-                bool testimprim = variable == "A_Imprimer";
-                bool testindice = variable == "Indice";
-                bool testindice2 = variable == "indice";
-                bool testOrigine = variable == "Origine";
-                bool testOrigin = variable == "Origin";
-                bool testorigin = variable == "origin";
-                bool testPays = variable == "Pays";
-                bool testpays = variable == "pays";
-                bool testModele = variable == "Modele";
-                bool testModelePath = variable == "Modele_Path";
+                string Parametre = dataGridViewParametre7.Rows[row].Cells[1].Value.ToString();
+                GetAutoPara(Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays);
                 if (testetl == true || testmac == true || testrecap == true || testimprim == true)
                 {
                     ChoixVraiFaux = new ChoixVraiFaux();
@@ -1266,316 +435,36 @@ namespace ModificationBaseDeDonnees
                     string choix = ChoixVraiFaux.choix;
                     dataGridViewParametre7.Rows[row].Cells[2].Value = choix;
                 }
-                if (testindice == true)
+                if (testindice == true || testindice2 == true)
                 {
                     string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
                     string indice = reference.Substring(6, 2);
                     dataGridViewParametre7.Rows[row].Cells[2].Value = indice;
                 }
-                if (testindice2 == true)
-                {
-                    string reference = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    string indice = reference.Substring(6, 2);
-                    dataGridViewParametre7.Rows[row].Cells[2].Value = indice;
-                }
-                if (testOrigine == true)
+                if (testOrigine == true || testOrigin == true || testorigin == true)
                 {
                     ChoixOrigine = new ChoixOrigine();
                     ChoixOrigine.ShowDialog();
                     string origine = ChoixOrigine.origine;
                     dataGridViewParametre7.Rows[row].Cells[2].Value = origine;
                 }
-                if (testOrigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre7.Rows[row].Cells[2].Value = origine;
-                }
-                if (testorigin == true)
-                {
-                    ChoixOrigine = new ChoixOrigine();
-                    ChoixOrigine.ShowDialog();
-                    string origine = ChoixOrigine.origine;
-                    dataGridViewParametre7.Rows[row].Cells[2].Value = origine;
-                }
-                if (testPays == true)
+                if (testPays == true || testpays == true)
                 {
                     ChoixPays = new ChoixPays();
                     ChoixPays.ShowDialog();
                     string pays = ChoixPays.pays;
                     dataGridViewParametre7.Rows[row].Cells[2].Value = pays;
-                }
-                if (testpays == true)
-                {
-                    ChoixPays = new ChoixPays();
-                    ChoixPays.ShowDialog();
-                    string pays = ChoixPays.pays;
-                    dataGridViewParametre7.Rows[row].Cells[2].Value = pays;
-                }
-                if (testModele == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre7.Rows[row].Cells[2].Value = modele;
-                    }
-                }
-                if (testModelePath == true)
-                {
-                    OpenFileDialog Browser = new OpenFileDialog();
-                    Browser.DefaultExt = ".btw";
-                    Browser.InitialDirectory = "S:\\Production\\Etiquettes\\MODELES";
-                    Browser.ShowDialog();
-                    string modeleprimaire = Browser.FileName;
-                    if (modeleprimaire != "")
-                    {
-                        int caractere = modeleprimaire.Length;
-                        string modele = modeleprimaire.Substring(33, caractere - 33);
-                        dataGridViewParametre7.Rows[row].Cells[2].Value = modele;
-                    }
                 }
             }
         }
-
-       /* private void comboBoxListeEtiquette_Validating(object sender, CancelEventArgs e)
-        {
-            nbreti = nbreti + 1;
-            int i = 0;
-            string etiquette = comboBoxListeEtiquette.Text;
-            this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette);
-            int nbrroweti = dataGridViewEtiquette.Rows.Count;
-            string produit = dataGridViewNatureDuProduit1.Rows[0].Cells[0].Value.ToString();
-            if (nbreti == 1)
-            {
-                Parametretabpage.Controls.Add(tabPage2);
-                for (i = 0; i < nbrroweti - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre2.Rows.Add();
-                    dataGridViewParametre2.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre2.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage2.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-
-
-            if (nbreti == 3)
-            {
-                Parametretabpage.Controls.Add(tabPage3);
-                string etiquette2 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette2);
-                int nbrroweti2 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti2 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre3.Rows.Add();
-                    dataGridViewParametre3.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre3.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage3.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-
-
-            if (nbreti == 5)
-            {
-                Parametretabpage.Controls.Add(tabPage4);
-                string etiquette3 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette3);
-                int nbrroweti3 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti3 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre4.Rows.Add();
-                    dataGridViewParametre4.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre4.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage4.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-
-            if (nbreti == 7)
-            {
-                Parametretabpage.Controls.Add(tabPage5);
-                string etiquette4 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette4);
-                int nbrroweti4 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti4 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre5.Rows.Add();
-                    dataGridViewParametre5.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre5.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage5.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-
-            if (nbreti == 9)
-            {
-                Parametretabpage.Controls.Add(tabPage6);
-                string etiquette5 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette5);
-                int nbrroweti5 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti5 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre61.Rows.Add();
-                    dataGridViewParametre61.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre61.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage6.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-
-            if (nbreti == 11)
-            {
-                Parametretabpage.Controls.Add(tabPage7);
-                string etiquette6 = comboBoxListeEtiquette.Text;
-                this.listeEtiquetteTableAdapter.FiltreByEtiquette(this.nouvelleBaseEssaieDataSet.ListeEtiquette, etiquette6);
-                int nbrroweti6 = dataGridViewEtiquette.Rows.Count;
-                for (i = 0; i < nbrroweti6 - 1; i++)
-                {
-                    string parametre = dataGridViewEtiquette.Rows[i].Cells[1].Value.ToString();
-                    dataGridViewParametre7.Rows.Add();
-                    dataGridViewParametre7.Rows[i].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-                    dataGridViewParametre7.Rows[i].Cells[1].Value = parametre;
-                }
-                tabPage7.Text = etiquette;
-                this.listeEtiquetteTableAdapter.Fill2(this.nouvelleBaseEssaieDataSet.ListeEtiquette, produit);
-                nbreti = nbreti + 1;
-            }
-        }*/
-
+        // Envoie les Modfifications dans les BDD
         private void button_Valider_Click(object sender, EventArgs e)
         {
-            bool pfil;
-            string reef = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
-            string tyype = dataGridViewProduit.Rows[0].Cells[1].Value.ToString();
-            string famille = dataGridViewProduit.Rows[0].Cells[3].Value.ToString();
-
-            int NbrRowP = dataGridViewParametre.Rows.Count;
-            int NbrRowF = dataGridViewFils.Rows.Count;
-
-            for (int i = 0; i < NbrRowP - 1; i++)
-            {
-                string nameeti = tabPage1.Text;
-                string parametre = dataGridViewParametre.Rows[i].Cells[1].Value.ToString();
-                string valeur = dataGridViewParametre.Rows[i].Cells[2].Value.ToString();
-                this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-            }
-            for (int a = 0; a < NbrRowF - 1; a++)
-            {
-                string type = dataGridViewFils.Rows[a].Cells[1].Value.ToString();
-                string fils = dataGridViewFils.Rows[a].Cells[2].Value.ToString();
-                string qty = dataGridViewFils.Rows[a].Cells[3].Value.ToString();
-                this.arborescenceTableAdapter.InsertArborescence(reef, type, fils, qty);
-            }
-            if (dataGridViewFils.Rows.Count == 1)
-            {
-                dataGridViewProduit.Rows[0].Cells[2].Value = false;
-                pfil = false;
-            }
-            else
-            {
-                dataGridViewProduit.Rows[0].Cells[2].Value = true;
-                pfil = true;
-            }
-            this.produitTableAdapter.InsertProduit(reef, tyype, pfil, famille);
-
-
-            string raf = reef.Substring(0, 5);
-            this.sN_ProduitsFinisTableAdapter1.FiltrebyRef(compteurs_SN_IESDataSet.SN_ProduitsFinis, raf);
-            if (dataGridViewSN.Rows.Count == 1)
-            {
-                int compteur = 0;
-                this.sN_ProduitsFinisTableAdapter1.InsertSN(raf, compteur);
-            }
-
-
-            if (dataGridViewParametre2.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr = dataGridViewParametre2.Rows.Count;
-                for (int i = 0; i < Nbr - 1; i++)
-                {
-                    string nameeti = tabPage2.Text;
-                    string parametre = dataGridViewParametre2.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre2.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            if (dataGridViewParametre3.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr3 = dataGridViewParametre3.Rows.Count;
-                for (int i = 0; i < Nbr3 - 1; i++)
-                {
-                    string nameeti = tabPage3.Text;
-                    string parametre = dataGridViewParametre3.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre3.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            if (dataGridViewParametre4.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr4 = dataGridViewParametre4.Rows.Count;
-                for (int i = 0; i < Nbr4 - 1; i++)
-                {
-                    string nameeti = tabPage4.Text;
-                    string parametre = dataGridViewParametre4.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre4.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            if (dataGridViewParametre5.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr5 = dataGridViewParametre5.Rows.Count;
-                for (int i = 0; i < Nbr5 - 1; i++)
-                {
-                    string nameeti = tabPage5.Text;
-                    string parametre = dataGridViewParametre5.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre5.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            if (dataGridViewParametre61.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr6 = dataGridViewParametre61.Rows.Count;
-                for (int i = 0; i < Nbr6 - 1; i++)
-                {
-                    string nameeti = tabPage6.Text;
-                    string parametre = dataGridViewParametre61.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre61.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            if (dataGridViewParametre7.Rows[0].Cells[0].Value != null)
-            {
-                int Nbr7 = dataGridViewParametre7.Rows.Count;
-                for (int i = 0; i < Nbr7 - 1; i++)
-                {
-                    string nameeti = tabPage7.Text;
-                    string parametre = dataGridViewParametre7.Rows[i].Cells[1].Value.ToString();
-                    string valeur = dataGridViewParametre7.Rows[i].Cells[2].Value.ToString();
-                    this.parametreTableAdapter.InsertParametre(reef, parametre, valeur, nameeti);
-                }
-            }
-            System.Windows.Forms.MessageBox.Show("La référence a été créée");
+            Validation();
+            MessageBox.Show("Update successful");
             this.Close();
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewFils_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1594,7 +483,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewFils.Rows[row].Cells[1].Value = carte;
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1608,7 +497,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre2_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1622,7 +511,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre2.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre3_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1636,7 +525,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre3.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre4_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1650,7 +539,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre4.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre5_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1664,7 +553,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre5.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre61_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1678,7 +567,7 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre61.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Récupère le paramètre selectionné avec le "combobox ajouter un paramètre" dans le datagridview paramètre
         private void dataGridViewParametre7_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             int row = e.RowIndex;
@@ -1692,12 +581,12 @@ namespace ModificationBaseDeDonnees
                 dataGridViewParametre7.Rows[row].Cells[0].Value = dataGridViewProduit.Rows[0].Cells[0].Value.ToString();
             }
         }
-
+        // Ferme le logiciel sans enregistré les modifs
         private void buttonAnnuler_Click(object sender, EventArgs e)
         {
             this.Close();
         }
-
+        // test
         private void buttonEtiquette_Click(object sender, EventArgs e)
         {
             nbreti = nbreti + 1;
@@ -1820,6 +709,30 @@ namespace ModificationBaseDeDonnees
                 }
                 nbreti = nbreti + 1;
             }
+        }
+        private void GetEtiquette(out int nbretiq)
+        {
+            DataGridView dataGridViewVerifProduit = new DataGridView();
+            EtiquetteHelper etiqHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre61, ref dataGridViewParametre7, ref dataGridViewFils, ref nouvelleBaseEssaieDataSet, ref parametreTableAdapter, ref arborescenceTableAdapter, ref produitTableAdapter, ref dataGridViewProduit);
+            etiqHelper.GetEtiquette(out nbretiq);
+        }
+        private void GetAutoPara(string Parametre, out bool testetl, out bool testmac, out bool testrecap, out bool testimprim, out bool testindice, out bool testindice2, out bool testOrigine, out bool testOrigin, out bool testorigin, out bool testPays, out bool testpays)
+        {
+            DataGridView dataGridViewVerifProduit = new DataGridView();
+            EtiquetteHelper etiHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre61, ref dataGridViewParametre7, ref dataGridViewFils, ref nouvelleBaseEssaieDataSet, ref parametreTableAdapter, ref arborescenceTableAdapter, ref produitTableAdapter, ref dataGridViewProduit);
+            etiHelper.GetAutoPara(Parametre, out testetl, out testmac, out testrecap, out testimprim, out testindice, out testindice2, out testOrigine, out testOrigin, out testorigin, out testPays, out testpays);
+        }
+        private void Validation()
+        {
+            DataGridView dataGridViewVerifProduit = new DataGridView();
+            EtiquetteHelper etiHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre61, ref dataGridViewParametre7, ref dataGridViewFils, ref nouvelleBaseEssaieDataSet, ref parametreTableAdapter, ref arborescenceTableAdapter, ref produitTableAdapter, ref dataGridViewProduit);
+            etiHelper.Validation();
+        }
+        private void GetFils(int row)
+        {
+            DataGridView dataGridViewVerifProduit = new DataGridView();
+            EtiquetteHelper etiHelper = new EtiquetteHelper(ref reference, ref Parametretabpage, ref tabPage1, ref tabPage2, ref tabPage3, ref tabPage4, ref tabPage5, ref tabPage6, ref tabPage7, ref dataGridViewNbrEti, ref dataGridViewParametre, ref dataGridViewParametre2, ref dataGridViewParametre3, ref dataGridViewParametre4, ref dataGridViewParametre5, ref dataGridViewParametre61, ref dataGridViewParametre7, ref dataGridViewFils, ref nouvelleBaseEssaieDataSet, ref parametreTableAdapter, ref arborescenceTableAdapter, ref produitTableAdapter, ref dataGridViewProduit);
+            etiHelper.GetFils(row);
         }
     }
 }
